@@ -1,0 +1,14 @@
+[
+    {
+        "id": "email_001",
+        "thread_id": "thread_123",
+        "subject": "Loan Payment Inquiry",
+        "body": "Dear Support Team, I want to confirm the payment status for my loan ID 98765, which was due on 15th March. Please let me know if you need any further information. Best regards, Jane Doe"
+    },
+    {
+        "id": "email_002",
+        "thread_id": "thread_123",
+        "subject": "Re: Loan Payment Inquiry - Need More Details",
+        "body": "Dear Support, I also need a copy of the payment confirmation receipt and the interest breakdown for the loan."
+    }
+]

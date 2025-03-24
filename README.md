@@ -1,60 +1,34 @@
-# 🚀 Project Name
+1. Clone the Repository
+   git clone https://github.dev/ewfx/gaied-next-gen-tech
 
-## 📌 Table of Contents
-- [Introduction](#introduction)
-- [Demo](#demo)
-- [Inspiration](#inspiration)
-- [What It Does](#what-it-does)
-- [How We Built It](#how-we-built-it)
-- [Challenges We Faced](#challenges-we-faced)
-- [How to Run](#how-to-run)
-- [Tech Stack](#tech-stack)
-- [Team](#team)
+2.  Install Required Dependencies
+    pip install fastapi==0.115.8 google-ai-generativelanguage==0.6.17 greenlet==3.1.1 \
+    langchain==0.3.21 langchain-community==0.3.20 langchain-core==0.3.47 \
+    langchain-google-genai==2.1.1 langchain-text-splitters==0.3.7 PyMuPDF==1.25.4 \
+    streamlit==1.42.2 pytz==2025.1 PyYAML==6.0.2 pyjson5==1.6.8 pyparsing==3.2.1 \
+    pypdf==5.4.0
+3.  Configure Google Gemini API Key
+    Set up your Google Gemini API key inside the configuration file:
+    Edit config/setting.py and add your API key.
 
----
+4.  Start the FastAPI Server
+    Open the command prompt, navigate to the project's main directory, and start the server:
 
-## 🎯 Introduction
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+    cd D:\NextGenAI-EC
+    python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload --workers 1 --loop asyncio
 
-## 🎥 Demo
-🔗 [Live Demo](#) (if applicable)  
-📹 [Video Demo](#) (if applicable)  
-🖼️ Screenshots:
+    Once the server is running, you can access the following API endpoints:
 
-![Screenshot 1](link-to-image)
+    Root Endpoint → GET http://localhost:8000/
 
-## 💡 Inspiration
-What inspired you to create this project? Describe the problem you're solving.
+    Process Email Endpoint → GET http://localhost:8000/process-emails
 
-## ⚙️ What It Does
-Explain the key features and functionalities of your project.
+5.  Run the UI Application
+    Open a new terminal, navigate to the React UI directory, and start the frontend
 
-## 🛠️ How We Built It
-Briefly outline the technologies, frameworks, and tools used in development.
+    cd D:\NextGenAI-EC\react-ui\loan-dashboard
+    npm start
 
-## 🚧 Challenges We Faced
-Describe the major technical or non-technical challenges your team encountered.
+This will launch the application in your default web browser, displaying the results in table and chart formats.
 
-## 🏃 How to Run
-1. Clone the repository  
-   ```sh
-   git clone https://github.com/your-repo.git
-   ```
-2. Install dependencies  
-   ```sh
-   npm install  # or pip install -r requirements.txt (for Python)
-   ```
-3. Run the project  
-   ```sh
-   npm start  # or python app.py
-   ```
 
-## 🏗️ Tech Stack
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
-
-## 👥 Team
-- **Your Name** - [GitHub](#) | [LinkedIn](#)
-- **Teammate 2** - [GitHub](#) | [LinkedIn](#)

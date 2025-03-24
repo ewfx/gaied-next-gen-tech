@@ -3,7 +3,7 @@
         "id": "email_001",
         "subject": "Loan Payment Reminder",
         "body": "Dear John, your loan ID 12345 is due on 25th March. The amount due is $1,200. Please contact your loan officer, Mary Smith, at (123) 456-7890 for any inquiries. Your loan term is 5 years with an interest rate of 3.5%.",
-        "attachments": [  {"name": "Loan", "path": "data/Loan.pdf"}
-    ]
+        "attachments": []
     }
+    
 ]

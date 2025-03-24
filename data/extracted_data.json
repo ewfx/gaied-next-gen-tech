@@ -1,0 +1,35 @@
+[
+    {
+        "email_id": "email_001",
+        "classification": "The email informs John that loan ID 12345 is due on March 25th for $1,200.  The loan term is 5 years at a 3.5% interest rate, and inquiries can be directed to loan officer Mary Smith at (123) 456-7890.  *(No PDF attachment was provided, so no information could be extracted from it.)*",
+        "fields": {
+            "Person_Names": [
+                "John",
+                "Mary Smith"
+            ],
+            "Dates": [
+                "25th March"
+            ],
+            "Phone_Numbers": [
+                "(123) 456-7890"
+            ],
+            "Loan_IDs_/_Reference_Numbers": [
+                "12345"
+            ],
+            "Interest_Rates": [
+                "3.5%"
+            ],
+            "Currency_Amounts": [
+                "$1,200"
+            ],
+            "Loan_Amount": "1200",
+            "Payment_Due_Dates": [
+                "25th March"
+            ],
+            "Long_Term_Duration": "5 years",
+            "request_type": "Lending Services",
+            "confidence_score": 0.95
+        },
+        "duplicate": false
+    }
+]
