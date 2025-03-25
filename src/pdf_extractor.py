@@ -56,8 +56,9 @@ def extract_text_from_pdf_bytes(pdf_bytes, rules):
                 )
 
             extracted_text += page_text
-
+       
         # Return both the extracted text and numerical values
+        print(extracted_text.strip(),numerical_values)
         return extracted_text.strip(), numerical_values
 
     except Exception as e:

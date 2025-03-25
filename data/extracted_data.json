@@ -1,35 +1,146 @@
 [
     {
-        "email_id": "email_001",
-        "classification": "The email informs John that loan ID 12345 is due on March 25th for $1,200.  The loan term is 5 years at a 3.5% interest rate, and inquiries can be directed to loan officer Mary Smith at (123) 456-7890.  *(No PDF attachment was provided, so no information could be extracted from it.)*",
+        "classification": "The email notification states a loan payment of $5,000 is due on March 25th, urging timely payment to avoid penalties.  *As no PDF is provided, information from a hypothetical PDF would be included here.*  For example, if the PDF attachment were a loan statement, the summary might continue:  The attached loan statement (Loan ID #12345) confirms this amount and due date for borrower John Doe's personal loan.  The statement also notes an upcoming interest rate adjustment effective April 1st.  Please remit payment by the due date. ",
         "fields": {
-            "Person_Names": [
-                "John",
-                "Mary Smith"
-            ],
-            "Dates": [
-                "25th March"
-            ],
-            "Phone_Numbers": [
-                "(123) 456-7890"
-            ],
-            "Loan_IDs_/_Reference_Numbers": [
-                "12345"
-            ],
-            "Interest_Rates": [
-                "3.5%"
-            ],
-            "Currency_Amounts": [
-                "$1,200"
-            ],
-            "Loan_Amount": "1200",
             "Payment_Due_Dates": [
-                "25th March"
+                "March 25th"
             ],
-            "Long_Term_Duration": "5 years",
+            "Payment_Amount": "5,000",
+            "Currency_Amounts": [
+                "5,000"
+            ],
+            "Late_Payment_Fees_/_Penalties": "penalties",
             "request_type": "Lending Services",
             "confidence_score": 0.95
         },
-        "duplicate": false
+        "email_id": "f29182515e2661a9389dc619f533d0f8ebaf00ea3b462cbaa41ebc132b81c76f",
+        "duplicate": false,
+        "matched_email_id": null,
+        "similarity": 0.0,
+        "reason": "No match"
+    },
+    {
+        "classification": {},
+        "fields": {},
+        "email_id": "f29182515e2661a9389dc619f533d0f8ebaf00ea3b462cbaa41ebc132b81c76f",
+        "duplicate": true,
+        "matched_email_id": "f29182515e2661a9389dc619f533d0f8ebaf00ea3b462cbaa41ebc132b81c76f",
+        "similarity": 1.0000001192092896,
+        "reason": "your loan payment, penalties, dear customer, march 25th, timely payment"
+    },
+    {
+        "classification": "The email details John's personal loan (ID 12345) of $1,200, due March 25th, with a 5-year term and a 3.5% interest rate, and mentions a separate adjustment to the ABTB Mid-Atlantic LLC Term Loan A-2, increasing Wells Fargo's commitment to $5,542,963.55, requiring a funding of $24,714.36, effective February 4, 2025.  However, the attached PDF from Bank of America to Wells Fargo concerns a CANTOR FITZGERALD LP USD 425MM MAR22 loan (CUSIP 13861EEDO), where Cantor Fitzgerald repaid $29,900,000.00, reducing the principal balance to $25,000,000.00, effective November 10, 2023. This repayment includes $20,000,000.00 under the SOFR (US) Term option.  Wells Fargo will remit $1,11,764.71 related to this transaction and requests a return of funds under specific circumstances.",
+        "fields": {
+            "Person Names": [
+                "John",
+                "Mary Smith",
+                "Ravi",
+                "Jonny Hernandez"
+            ],
+            "Dates": [
+                "March 25th",
+                "February 5, 2025",
+                "February 4, 2025",
+                "11-4-2022",
+                "8-Nov-2023",
+                "10-Nov-2023",
+                "20-Jul-2023",
+                "20-Nov-2023"
+            ],
+            "Phone Numbers": [
+                "(123) 456-7890",
+                "999-999-9999",
+                "877-606-9426",
+                "+1952773225"
+            ],
+            "Loan IDs / Reference Numbers": [
+                "12345",
+                "ABTB Mid-Atlantic LLC Term Loan A-2",
+                "ABTB MID-ATLANTIC LLC $171.3MM 11-4-2022",
+                "CANTOR FITZGERALD LP USD 425MM MAR22 / REVOLVER / CANTOR FIT00037",
+                "13861EEDO",
+                "US13861EAE05",
+                "13861DEAF7",
+                "US13861EFDFAF79",
+                "CANTOR FITZGERALD LP USD 425MM MAR22, SOFR (US) Term Principal Payment\n(CANTOR FIT00037)"
+            ],
+            "Interest Rates": [
+                "3.5%"
+            ],
+            "Currency Amounts": [
+                "$1,200",
+                "$5,542,963.55",
+                "$24,714.36",
+                "USD 29,900,000.00",
+                "USD 45,000,000.00",
+                "USD 25,000,000.00",
+                "USD 20,000,000.00",
+                "USD 3,176,470.59",
+                "USD 64,705.88",
+                "USD 1,11,764.71"
+            ],
+            "Organizations": [
+                "Citizens Bank",
+                "Wells Fargo",
+                "ABTB Mid-Atlantic LLC",
+                "BANK OF JAPAN",
+                "Bank of America, N.A.",
+                "WELLS FARGO BANK NATIONAL ASSOCIATION",
+                "CANTOR FITZGERALD LP"
+            ],
+            "Bank Account Details": [
+                "XXXXXXXXXX0720"
+            ],
+            "Loan Amount": [
+                "171.3MM"
+            ],
+            "Payment Due Dates": [
+                "March 25th"
+            ],
+            "Long Term Duration": [
+                "5-year"
+            ],
+            "Loan Type": [
+                "personal loan",
+                "Term Loan A-2",
+                "REVOLVER"
+            ],
+            "Bank Names": [
+                "Citizens Bank",
+                "Wells Fargo",
+                "BANK OF JAPAN",
+                "Bank of America, N.A.",
+                "WELLS FARGO BANK NATIONAL ASSOCIATION",
+                "WELLS FARGO BANK, NA"
+            ],
+            "Routing Numbers": [
+                "122520248"
+            ],
+            "Payment Amount": [
+                "29,900,000.00",
+                "20,000,000.00",
+                "1,11,764.71"
+            ],
+            "Remittance Details": [
+                "We will remit USD 1,11,764.71 on the effective date."
+            ],
+            "Document Types": [
+                "PDF"
+            ],
+            "Email Addresses": [
+                "test@wellsfargo.com",
+                "jonny.test@bofa.com"
+            ],
+            "Document Dates": [
+                "8-Nov-2023"
+            ],
+            "request_type": "Lending Services",
+            "confidence_score": 0.95
+        },
+        "email_id": "4a4e4fb1a6ea914e076f36c41faebde66c9a747f93244d93f92639da58424cc7",
+        "duplicate": false,
+        "matched_email_id": null,
+        "similarity": 0.0,
+        "reason": "No match"
     }
 ]
