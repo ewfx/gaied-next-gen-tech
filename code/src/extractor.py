@@ -52,7 +52,7 @@ def validate_and_correct_json(response):
         try:
             # Use pyjson5 for auto-correction
             corrected_json = pyjson5.loads(json_part)
-            print("\n🔧 Auto-corrected JSON:")
+            print("\n Auto-corrected JSON:")
             #print(json.dumps(corrected_json, indent=4))
             return corrected_json
 

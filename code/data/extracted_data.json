@@ -1,8 +1,8 @@
 [
     {
-        "classification": "John's personal loan (ID 12345) for $1,200 is due on March 25th with a 5-year term and a 3.5% interest rate.  Separately, the attached PDF from Bank of America details Cantor Fitzgerald LP's repayment of USD 29,900,000.00 against a USD 425MM MAR22 loan (CUSIP: 13861EEDO), reducing the principal balance from USD 45,000,000.00 to USD 25,000,000.00, effective November 10, 2023.  This includes a USD 20,000,000.00 SOFR (US) Term option payment.  Wells Fargo, acting as agent, will remit USD 1,11,764.71 to Wells Fargo Bank, NA (Account No: XXXXXXXXXX0720).  For inquiries about John's personal loan, contact Mary Smith at (123) 456-7890. ",
+        "classification": "John's personal loan (ID 12345) for $1,200 is due on March 25th with a 5-year term and a 3.5% interest rate.  Separately, the email mentioned an adjustment to the ABTB Mid-Atlantic LLC Term Loan A-2, increasing JP Morgan's commitment to $5,542,963.55, requiring a funding of $24,714.36, effective February 4, 2025.  However, the attached PDF from Bank of America to Wells Fargo details Cantor Fitzgerald LP's repayment of USD 29,900,000.00 against a USD 425MM MAR22 loan (CUSIP: 13861EEDO), reducing the principal balance from USD 45,000,000.00 to USD 25,000,000.00, effective November 10, 2023.  This repayment includes USD 20,000,000.00 under the SOFR (US) Term option. Wells Fargo will remit USD 1,11,764.71 on the effective date, subject to certain conditions.",
         "duplicate": false,
-        "email_id": "63a7efe3361d49fbadc4294cbad143f7",
+        "email_id": "0570acfdbfd949f58601e8bf8cfb58ea",
         "fields": {
             "request_type": "Commitment Change",
             "sub_request_type": "Increase",

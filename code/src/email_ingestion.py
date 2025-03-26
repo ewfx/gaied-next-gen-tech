@@ -10,7 +10,7 @@ def fetch_emails():
     return emails
 
 
-def fetch_emails_from_eml(directory="D:/next-gen-tech/gaied-next-gen-tech/data/"):
+def fetch_emails_from_eml(directory="D:/next-gen-tech-latest/gaied-next-gen-tech/code/data/"):
     """
     Reads and parses all .eml files in the specified directory, prioritizing by filename order.
 
