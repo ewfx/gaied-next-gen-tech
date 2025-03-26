@@ -66,10 +66,7 @@ This AI-powered tool automates the triage and routing of emails and documents in
 ## 🚧 Challenges We Faced
 ## Handling Diverse File Formats
 Parsing and standardizing content across PDFs, DOCX, and EML files required robust pre-processing logic due to inconsistencies in formatting and metadata structures.
-
-## Model Performance and Optimization
-Integrating Mistral-7B with limited compute resources was challenging. We had to use quantization techniques (4-bit) to balance accuracy and performance on available GPUs.
-
+Model Performance and Optimization
 ## Data Classification Accuracy
 Ensuring high accuracy in classifying request
 
@@ -103,11 +100,11 @@ pip install -r requirements.txt
 
     Root Endpoint → GET http://localhost:8000/
 
-    Process Email Endpoint → GET http://localhost:8000/process-emails
-
-Run the UI Application
-    Open a new terminal, navigate to the React UI directory, and start the frontend.
-    or else we can consume the api endpoint to process the email.
+   Process Email Endpoint → GET http://localhost:8000/process-emails
+   
+   Directly place the .eml file inside the "data" folder and hit the api.
+   Run the UI Application build in react to upload the file and process the file.
+    
 
 
 ## 🏗️ Tech Stack
