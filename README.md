@@ -64,12 +64,9 @@ This AI-powered tool automates the triage and routing of emails and documents in
 • Enables easy integration with downstream systems or databases.
 
 ## 🚧 Challenges We Faced
-## Handling Diverse File Formats
-Parsing and standardizing content across PDFs, DOCX, and EML files required robust pre-processing logic due to inconsistencies in formatting and metadata structures.
-Model Performance and Optimization
 ## Data Classification Accuracy
 Ensuring high accuracy in classifying request
-
+## Data Duplication 
 ## 🏃 How to Run
 ### 🚀 How to Run the Project
 
