@@ -111,9 +111,9 @@ python main.py
 - **Mistral-7B-Instruct-v0.1** –
 
 ## 👥 Team
-## Name : AI-SQUAD
+## Name : NextGenTech
 ## Members: 
-## 1.Suresh Padala
-## 2.Ranjana Arjariya
-## 3.Garima Raha
-## 4.Gangashekar Adumulla
+## 1.Niraj Kumar
+## 2.Ravindra Singh
+## 3.Dinakar mathew
+## 4. Chinara Bibhuprasad
