@@ -4,6 +4,7 @@ import DynamicChart from "./components/DynamicChart";
 import DynamicTable from "./components/DynamicTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PieChart from "./components/DynamicPieChart";
+import UploadFile from "./components/UploadFile";
 var jsonData=[
 
   {
@@ -117,17 +118,22 @@ function App() {
       </header>
     </div>
     <div className="container">
-      <h1>Data Dashboard</h1>
+    {/* <h1 style={{ color: "red" }}>Data Extraction Summary</h1> */}
+
       {/* {emailData.length > 0 ? (
         <DynamicChart emailData={emailData} />
       ) : (
         <p>Loading data...</p>
       )} */}
-      <DynamicTable emailData={emailData} />
-      <PieChart emailData={emailData} />
+      {/* <DynamicTable emailData={jsonData} />
+      <PieChart emailData={emailData} /> */}
+
+      <UploadFile/>
     </div>
   </>
   );
 }
+
+
 
 export default App;

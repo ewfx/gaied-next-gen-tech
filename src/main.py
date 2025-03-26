@@ -7,9 +7,11 @@ import logging
 import tempfile
 import traceback
 from fastapi import FastAPI, HTTPException
-from src.duplicate_detector import compare_with_existing, generate_email_id, store_email
+from rules import requesttype
+from src.duplicate_detector import  clear_redis_cache, detect_duplicate, generate_email_id
 from src.email_ingestion import fetch_emails_from_eml
 from src.pdf_extractor import load_rules
+from rules.requesttype import request_type_rules
 from fastapi.middleware.cors import CORSMiddleware
 
 # Configure logging
@@ -33,7 +35,6 @@ try:
     from src.classifier import classify_email
     from src.extractor import extract_fields
     from src.extractor import extract_dynamic_fields
-    from src.duplicate_detector import detect_duplicates
     from services.email_service import save_extracted_data
     from src.pdf_extractor import extract_text_from_pdf_bytes
 except ImportError as e:
@@ -57,6 +58,7 @@ def read_root():
 @app.get("/process-emails")
 def process_emails():
     logger.info("Starting email processing...")
+    clear_redis_cache()
     try:
         directory = "D:/next-gen-tech/gaied-next-gen-tech/data/emails"
         emails = fetch_emails_from_eml()
@@ -69,39 +71,20 @@ def process_emails():
 
         for email in emails:
             try:
-                is_duplicate_email = False 
-                #  Early duplicate detection before classification & extraction
-                is_duplicate, email_hash = detect_duplicates(email)
-                
-                #print("email hash"+str(email_hash))
-                print("is_duplicate"+str(is_duplicate))
                  # Create email_data object before continuing
                 email_data = {
                     "classification": {},
                     "fields": {},
-                    "email_id": "",
                     "duplicate": False,
                     "matched_email_id": None,
                     "similarity": None,
                 }
 
-                #  Skip duplicate emails immediately
-                # if email_hash in existing_hashes or is_duplicate:
-                #     is_duplicate_email = True  #  Mark as duplicate
-                #     is_duplicate_email = True  #  Mark as duplicate
-                #     email_data["duplicate"] = True  # Mark it as duplicate
-                #     extracted_data.append(email_data)  # Add it to the output
-                #     continue  
-                
-                # #  Add unique hash to the set
-                # print("existing hash"+email_hash)
-                # existing_hashes.add(email_hash)
  
                 pdf_text=""
                 numerical_fields = {}
                  #  Extract PDF text from attachments
                 if "attachments" in email:
-                    print('attachment finds')
                     for attachment in email["attachments"]:
                       try:
                          # Decode Base64 data
@@ -109,19 +92,13 @@ def process_emails():
                          with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
                           tmp_file.write(binary_data)
                           tmp_file_path = tmp_file.name
-                            
-                        #pdf_path = attachment.get("path")
-                        
+
                         # Process all attachments when rules are disabled
-                         allowed_types = rules["extraction"]["attachment_types"]
-                         print("Allowed rules: " + str(allowed_types))  
+                         allowed_types = rules["extraction"]["attachment_types"]  
                          if rules.get("disable_rules", False) or tmp_file_path.endswith(tuple(allowed_types)):
                                 with open(tmp_file_path, "rb") as f:
                                     pdf_bytes = f.read()
-                                #print("inside pdf data")
                                 pdf_content, pdf_numerical = extract_text_from_pdf_bytes(pdf_bytes, rules)
-                                #print(pdf_content)
-                                #print(pdf_numerical)
                                 if pdf_content:
                                     pdf_text += f"\n[PDF Attachment Text]\n{pdf_content}"
                                     if not rules.get("disable_rules", False):
@@ -149,57 +126,41 @@ def process_emails():
                             combined_text += f"\n{pdf_text}"
                     else:
                         combined_text = pdf_text
-                print('combined text'+combined_text)
 
-                email_id=generate_email_id(combined_text)
-                print("email-id"+email_id)
-                result = compare_with_existing(email_id, combined_text, threshold=0.85)
+                email_id=generate_email_id()
+                result = detect_duplicate(combined_text)
                 if not result["duplicate"]:
-                    store_email(email_id, combined_text)
+                    
                     email_data.update({
-                        "email_id": email_id,
+                        "classification": classify_email(combined_text),
+                        "fields":extract_fields(combined_text),
                         "duplicate": False,
+                        "email_id":email_id,
                         "similarity": result["similarity"],
-                        "reason": result["reason"],
-                        "classification":classify_email(combined_text),
-                        "fields":extract_fields(combined_text)
+                        "reason": result["reason"]
                     })
                 else:
                     email_data.update({
-                        "email_id": email_id,
                         "duplicate": True,
                         "similarity": result["similarity"],
                         "reason": result["reason"],
                         "matched_email_id": result.get("existing_email_id", None),
                     })
-      
-
-                # Classification and Extraction
-                classification ={} #classify_email(combined_text)
                 
-                dynamic_fields ={} #extract_fields(combined_text)
+                # checking for the request type if under request type we have any field needs to be priority over other fiels
+                #data = json.loads(email_data)
+                #email = data.get("data", [])[0]
+                
+                
+                request_type = email_data.get("fields", {}).get("request_type")
 
-                # Include numerical fields only if rules are enabled
-                if not rules.get("disable_rules", False):
-                    dynamic_fields.update(numerical_fields)
+                if request_type in requesttype.request_type_rules:
+                    print("request_type"+ request_type)
+                    filterres = extract_by_request_type(email_data, requesttype.request_type_rules)
+                    extracted_data.append(filterres)
+                else:
+                    extracted_data.append(email_data)
 
-                #is_duplicate, email_hash = detect_duplicates(email)
-                #logger.info(f"Duplicate: {is_duplicate}, Hash: {email_hash}")
-
-                # if not is_duplicate:
-                #     email_data = {
-                #         "email_id": email['id'],
-                #         "classification": classification,
-                #         "fields": dynamic_fields,
-                #         "duplicate": is_duplicate
-                #     }
-                # email_data = {
-                #     #"email_id": email['id'],
-                #     "classification": classification,
-                #     "fields": dynamic_fields,
-                #     "duplicate": is_duplicate_email
-                # }
-                extracted_data.append(email_data)
 
             except Exception as e:
                 logger.error(f"Error processing email {email.get('id', 'Unknown')}: {str(e)}")
@@ -215,6 +176,42 @@ def process_emails():
         logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
     
+
+def extract_by_request_type(email_data, rules):
+    """Extract fields based on request type configuration and keep them under 'fields'."""
+    try:
+        # Extract request type
+        request_type = email_data.get("fields", {}).get("request_type", "Unknown")
+        
+        if request_type not in rules:
+            print(f"No rules defined for request type: {request_type}")
+            return email_data  # Return the original data if no rule found
+            
+        # Get allowed fields based on rules
+        allowed_fields = rules[request_type]["fields"]
+        # Create the result structure
+        result = {
+            "classification": email_data.get("classification", ""),
+            "duplicate": email_data.get("duplicate", False),
+            "email_id": email_data.get("email_id", ""),
+            "fields": {
+                "request_type": email_data["fields"].get("request_type"),
+                "sub_request_type": email_data["fields"].get("sub_request_type"),
+                "assign_teams": email_data["fields"].get("assign_teams"),
+                "confidence_score": email_data["fields"].get("confidence_score")
+            }
+        }
+
+        # Add only allowed fields
+        for field in allowed_fields:
+            if field in email_data["fields"]:
+                result["fields"][field] = email_data["fields"][field]
+
+        return result
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return email_data
 
 # Ensure the server is only started in the main process
 if __name__ == "__main__":
