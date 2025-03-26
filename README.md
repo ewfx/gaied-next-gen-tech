@@ -28,7 +28,7 @@ This AI-powered tool automates the triage and routing of emails and documents in
 
 • Detects and flags duplicate or redundant information
 
-• Utilizes Mistral-7B for advanced text understanding and classification
+• Utilizes  for advanced text understanding and classification
 
 • Helps streamline operations by integrating into existing document workflows
 
@@ -41,7 +41,7 @@ This AI-powered tool automates the triage and routing of emails and documents in
 
 ## 2. GenAI-Powered Information Extraction
 
-• Utilizes Mistral-7B with 4-bit quantization for efficient, GPU-optimized inference.
+• Utilizes gemini-1.5-pro and hugging face models.
 
 • Extracts relevant financial data and metadata using context-aware prompts.
 
@@ -90,13 +90,24 @@ cd gaied-next-gen-tech
 ```bash
 pip install -r requirements.txt
 ```
+3. Configure Google Gemini API Key
+    Set up your Google Gemini API key inside the configuration file:
+    Edit config/setting.py and add your API key.
+   
+5. Start the FastAPI Server
+    Open the command prompt, navigate to the project's main directory, and start the server:
 
+   python -m uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload --workers 1 --loop asyncio from the main directory
 
-3. **Start the Application**
+   Once the server is up/running, you can access the following API endpoints:
 
-```bash
-python main.py
-```
+    Root Endpoint → GET http://localhost:8000/
+
+    Process Email Endpoint → GET http://localhost:8000/process-emails
+
+Run the UI Application
+    Open a new terminal, navigate to the React UI directory, and start the frontend.
+    or else we can consume the api endpoint to process the email.
 
 
 ## 🏗️ Tech Stack
@@ -105,11 +116,12 @@ python main.py
 - **Python 3.9+**
 
 #### 🧠 AI & NLP
-- **Hugging Face Transformers** – for loading and running **Mistral-7B** model  
-- **BitsAndBytes** – for 4-bit quantization to run LLM on low-memory GPUs  
-- **PyTorch** – backend framework to run the quantized LLM  
-- **Mistral-7B-Instruct-v0.1** –
-
+- **Hugging Face Transformers**   
+- **BitsAndBytes** –   
+- **PyTorch** –   
+- **gemini-1.5-pro** –
+-  ** redis **-- for handling duplication logic
+-  ** PyMuPDF**
 ## 👥 Team
 ## Name : NextGenTech
 ## Members: 
